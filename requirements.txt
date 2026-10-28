@@ -1,0 +1,42 @@
+# Python 3.11.  Set up with:
+#     conda create -n quantum-fuel python=3.11
+#     conda activate quantum-fuel
+#     pip install -r requirements.txt
+#
+# Versions are PINNED to the set tests/test_smoke.py passed on (2026-10-28,
+# Linux workstation; qiskit-aer and streamlit added/bumped that day).
+# A saved model does not survive a scikit-learn upgrade: optimizer.load_model
+# notices and retrains, but that costs a training run -- so upgrade on purpose.
+
+# Phase 1 (core pipeline) -- all you need to run demo.py
+numpy==2.4.6
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.17.1       # least-squares fit of the physics model
+joblib==1.6.0
+matplotlib==3.11.2
+
+# Phase 2 (quantum-inspired QUBO optimizers)
+pyqubo==1.5.0
+dwave-neal==0.6.0
+dwave-system==1.36.0    # real D-Wave annealer + Tabu backend (solvers/backends.py)
+
+# Phase 2c (gate-model quantum: QAOA + VQE on the SAME QUBO) -- experiments/quantum_gate.py
+qiskit==2.5.2
+qiskit-aer==0.18.2          # local statevector simulator (free, offline)
+                            # NVIDIA GPU on Linux: see requirements-gpu.txt
+qiskit-algorithms==0.4.0    # QAOA, SamplingVQE
+qiskit-optimization==0.7.0  # QUBO -> Ising Hamiltonian conversion
+
+# Phase 2 extras -- two more boosters in the model comparison (train_model.py
+# skips them if they are missing)
+xgboost==3.2.0
+lightgbm==4.7.0
+# The genetic algorithm (solvers/ga.py) is plain NumPy, so no `deap`.
+
+# Optional, only for the step named:
+# qiskit-ibm-runtime   # fleet/quantum_qaoa.py --backend ibm (real IBM hardware)
+# python-docx          # docs/make_concepts_doc.py
+
+# Phase 3 (dashboard) -- dashboard/app.py, `python run.py dashboard`
+streamlit==1.66.1

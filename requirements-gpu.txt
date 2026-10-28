@@ -1,0 +1,11 @@
+# GPU statevector simulation for QAOA / VQE (Linux + NVIDIA driver for CUDA 12).
+# The GPU build REPLACES qiskit-aer (both install the same `qiskit_aer` package),
+# so after `pip install -r requirements.txt`:
+#
+#     pip uninstall -y qiskit-aer
+#     pip install -r requirements-gpu.txt
+#
+# Pulls the CUDA 12 runtime + cuQuantum as pip packages (~2 GB); no system CUDA
+# toolkit needed. solvers/gate.py then uses the GPU from 22 qubits up
+# (FUEL_QDEVICE=CPU to turn it off). Tested on an RTX A6000, driver 570.
+qiskit-aer-gpu==0.18.2

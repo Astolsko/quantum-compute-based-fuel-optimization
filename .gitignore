@@ -1,0 +1,14 @@
+# Node (only used to build the .pptx via pptxgenjs)
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Local editor / assistant session files and private notes
+.claude/
+AI_HANDOFF.md
+
+# Full runs (run_all.sh): one folder per run, large
+runs/
